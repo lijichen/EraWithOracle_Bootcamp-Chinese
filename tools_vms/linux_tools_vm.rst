@@ -4,23 +4,23 @@
 Linux Tools VM
 ---------------
 
-Overview
+概览
 +++++++++
 
-This CentOS VM image will be staged with packages used to support multiple lab exercises.
+此CentOS镜像，会作为预备实验环境的一部分，会在多个实验中被用到.
 
-Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**.
+如果在 **Lab Setup** 章节发现相关指导，请将此VM部署到您的集群中，并以您的姓名首字母简写作为唯一标识.
 
 .. raw:: html
 
-  <strong><font color="red">Only deploy the VM once, it does not need to be cleaned up as part of any lab completion.</font></strong>
+  <strong><font color="red"> 我们通常只需要部署此虚拟机一次，在本章节实验结束后无需删除，因为可能还会在其它实验章节中重复使用.</font></strong>
 
-Deploying CentOS
+部署CentOS
 ++++++++++++++++
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+在 **Prism Central** > 选择 :fa:`bars` **> Virtual Infrastructure > VMs**,然后点击 **Create VM**.
 
-Fill out the following fields:
+根据以下提示完成填写:
 
 - **Name** - *Initials*-Linux-ToolsVM
 - **Description** - (Optional) Description for your VM.
@@ -28,42 +28,42 @@ Fill out the following fields:
 - **Number of Cores per vCPU** - 2
 - **Memory** - 2 GiB
 
-- Select **+ Add New Disk**
+- 选择 **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
     - **Image** - CentOS7.qcow2
-    - Select **Add**
+    - 选择 **Add**
 
 .. -------------------------------------------------------------------------------------
-.. The Below as soon as 5.11 is GA and we want to run that version for our workshops!!!!
+.. 以下选项只针对当前环境，当5.11版本 GA后，我们会在此处选择默认的UEFI选项!
 
 .. - **Boot Configuration**
  ..  - Leave the default selected **Legacy Boot**
 
    .. .. note::
-   ..  At the following URL you can find the supported Operating Systems
+   ..  在以下链接中，您可以找到可支持UEFI的操作系统版本
    ..  http://my.nutanix.com/uefi_boot_support
 
 .. -------------------------------------------------------------------------------------
 
 
-- Select **Add New NIC**
+- 选择 **Add New NIC**
     - **VLAN Name** - Secondary
-    - Select **Add**
+    - 选择 **Add**
 
-Click **Save** to create the VM.
+点击 **Save** 以创建VM.
 
-Power on the VM.
+并开启VM的电源.
 
-Installing Tools
+安装工具
 ++++++++++++++++
 
-Login to the VM via ssh or Console session, using the following credentials:
+使用以下登录信息通过SSH或Console工具登录虚拟机:
 
 - **Username** - root
 - **password** - nutanix/4u
 
-Install the software needed by running the following commands:
+通过运行以下命令来安装所需的软件：
 
 .. code-block:: bash
 
@@ -73,10 +73,10 @@ Install the software needed by running the following commands:
   npm install -g express
 
 
-Configuring NTP
+配置NTP
 ...............
 
-Enable and configure NTP by running the following commands:
+通过运行以下命令来启用和配置NTP:
 
 .. code-block:: bash
 
@@ -85,10 +85,10 @@ Enable and configure NTP by running the following commands:
   ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org
   systemctl restart ntpd
 
-Disabling Firewall and SELinux
+禁用防火墙和SELinux服务
 ..............................
 
-Disable the firewall and SELinux by running the following commands:
+通过运行以下命令来禁用防火墙和SELinux服务:
 
 .. code-block:: bash
 
@@ -97,10 +97,10 @@ Disable the firewall and SELinux by running the following commands:
   setenforce 0
   sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
 
-Installing Python
+安装Python环境
 .................
 
-Install Python by running the following commands:
+通过运行以下命令来安装 Python环境:
 
 .. code-block:: bash
 

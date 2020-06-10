@@ -1,21 +1,21 @@
-.. _admin_oracle:
+.. _管理Oracle数据库:
 
 --------------------------
-DB Administration with Era
+通过Era管理数据库
 --------------------------
 
-We will now see how to perform normal database admin task with Era.
+现在，我们将看到如何使用Era执行普通的数据库管理任务.
 
-**In this lab you will Administor your ORACLE DB**
+**在本实验中，您将学习如何管理您的ORACLE DB**
 
-Explore Your Database
+探索您的数据库
 ++++++++++++++++++++++
 
-#. In **Era**, select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
+#. 在 **Era** 中, 从下拉菜单中选择 **Databases** ，并从左侧菜单中选择 **Sources** .
 
    .. figure:: images/1.png
 
-#. Click into your *Initials*\ **-proddb**, this will take you back into the Database Summary page. This page provides details of the Database, Database Server access, Time Machine schedule, Compute/Network/Software profiles used to provision.
+#. 单击您的 *Initials*\ **-proddb** 实例名称, 系统将回到数据库this will take you back into the Database Summary页面. 此页面提供了有关数据库，数据库访问，Time Machine日程设置和用于配置的计算/网络/软件配置文件等详细信息。
 
     - **Database Summary:**
 
@@ -33,15 +33,15 @@ Explore Your Database
 
     .. figure:: images/5.png
 
-Snapshot Your Database
+为数据库创建快照保护
 ++++++++++++++++++++++
 
-Before we take a manual snapshot of our Database, lets write a new table into our ProdDB.
+在对数据库进行手动快照之前，我们先在ProdDB中插入一个新表.
 
-Write New Table Into Database
+在数据库中插入新表
 .............................
 
-#. SSH (Terminal/Putty) into your *Initials*\ -proddb VM
+#. 通过SSH (Terminal/Putty)客户端登陆到 *Initials*\ -proddb虚拟机
 
    - **User Name** - oracle
    - **Password** - Nutanix/4u
@@ -50,13 +50,13 @@ Write New Table Into Database
 
      ssh oracle@PRODDB IP
 
-#. Launch **sqlplus**
+#. 启动 **sqlplus**
 
      .. code-block:: Bash
 
        sqlplus / as sysdba
 
-#. Execute the following to create a table:
+#. 执行以下操作创建新表:
 
      .. code-block:: Bash
 
@@ -66,7 +66,7 @@ Write New Table Into Database
        column2 DATE
        );
 
-#. Verify the new table is there by executing the following to list the table:
+#. 通过执行以下操作列出表来验证新表是否存在:
 
      .. code-block:: Bash
 
@@ -75,22 +75,22 @@ Write New Table Into Database
        from sys.all_tables
        where table_name like 'TEST%';
 
-Take Manual Snapshot of Database
+手动创建数据库快照
 ................................
 
-#. In **Era**, select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
+#. 在 **Era** 中, 从下拉菜单中选择 **Databases** 并从左侧菜单中选择 **Sources** .
 
-#. Click on the Time Machine for your Database *Initials*\ -proddb_TM
+#. 单击数据库的Time Machine *Initials*\ -proddb_TM
 
    .. figure:: images/6.png
 
-#. Click **Actions > Log Catch Up**.
+#. 点击 **Actions > Log Catch Up**.
 
    .. figure:: images/12.png
 
-#. Click **Yes*
+#. 点击 **Yes**
 
-#. Once that is complete, click **Actions > Snapshot**.
+#. 完成后, 点击 **Actions > Snapshot**.
 
    .. Figure:: images/7.png
 
@@ -98,22 +98,22 @@ Take Manual Snapshot of Database
 
    .. Figure:: images/8.png
 
-#. Click **Create**
+#. 点击 **Create**
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 2-5 minutes.
+#. 从下拉菜单中选 **Operations** 中监控执行进度，此步骤通常需要2-5分钟.
 
-Clone Your Database Server & Database
+克隆数据库
 +++++++++++++++++++++++++++++++++++++
 
-#. In **Era**, select **Time Machines** from the dropdown menu and select *Initials*\ -proddb_TM
+#. 在 **Era** 中, 从下拉菜单中选择 **Time Machines** 然后选择 *Initials*\ -proddb_TM
 
-#. Click **Actions > Clone Database**.
+#. 点击 **Actions > Clone Database**.
 
    - **Snapshot** - *Initials*\ -proddb-1st-Snapshot (Date Time)
 
    .. figure:: images/9.png
 
-#. Click **Next**
+#. 点击 **Next**
 
    - **Database Server** - Create New Server
    - **Database Server Name** - *Initials*\ _oracle_prod_Clone1
@@ -127,7 +127,7 @@ Clone Your Database Server & Database
 
    .. figure:: images/10.png
 
-#. Click **Next**
+#. 点击 **Next**
 
    - **Clone Name** - *Initials*\ _proddb_Clone1
    -  **SID** - *Initials*\ prod
@@ -136,19 +136,20 @@ Clone Your Database Server & Database
 
    .. figure:: images/11.png
 
-#. Click **Clone**
+#. 点击 **Clone**
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 30-50 minutes.
+#. 从下拉菜单中选择 **Operations** 以监控操作进度，此过程大约30-50分钟.
 
-Delete Table and Clone Refresh
+删除表并刷新克隆
 ++++++++++++++++++++++++++++++
 
-There are times when a table or other data gets deleted (by accident), and you would like to get it back. here we will delete a table and use the Era Clone Refresh action from the last snapshot we took.
+有时，不可避免的会发生数据库中的一个表空间或其它数据被误删除的事故，我们当然会希望能够用一些手段恢复这些数据。下面我们会尝试删除一个表空间，并通过Era克隆刷新功能从最近一份快照中尝试还原。
 
-Delete Table
+
+删除表空间
 ............
 
-#. SSH (Terminal/Putty) into your *Initials*\ -proddb_Clone1 VM
+#. 通过SSH (Terminal/Putty) 终端登陆 *Initials*\ -proddb_Clone1 虚拟机
 
    - **User Name** - oracle
    - **Password** - Nutanix/4u
@@ -157,19 +158,19 @@ Delete Table
 
      ssh oracle@PRODDB_Clone1 IP
 
-#. Launch **sqlplus**
+#. 启动 **sqlplus**
 
      .. code-block:: Bash
 
        sqlplus / as sysdba
 
-#. Execute the following to Drop the table:
+#. 执行以下操作删除表:
 
      .. code-block:: Bash
 
        DROP TABLE testlabtable;
 
-#. Verify the table is gone by executing the following to list the table:
+#. 通过执行以下列出表来验证表已被删除:
 
      .. code-block:: Bash
 
@@ -178,23 +179,23 @@ Delete Table
        from sys.all_tables
        where table_name like 'TEST%';
 
-Clone Refresh
+克隆刷新
 .............
 
-#. In **Era**, select **Databases** from the dropdown menu and **Clones** from the lefthand menu.
+#. 在 **Era** 中, 从下拉菜单中选择 **Databases** 并从左侧菜单中选择 **Clones** .
 
-#. Select the Clone for your Database *Initials*\ _proddb and Click **Refresh**.
+#. 选择数据库的克隆 *Initials*\ _proddb,然后单击 **Refresh**.
 
    - **Snapshot** - *Initials*\ _proddb-1st-Snapshot (Date Time)
 
-#. Click **Refresh**
+#. 点击 **Refresh**
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 2-5 minutes.
+#. 从下拉菜单中选择 **Operations** 并监控执行进度，此过程大约需要2-5分钟.
 
-Verify Table is Back
+验证表是否恢复
 ....................
 
-#. SSH (Terminal/Putty) into your *Initials*\ -proddb_Clone1 VM
+#. 通过SSH (Terminal/Putty) 终端登陆 *Initials*\ -proddb_Clone1 虚拟机
 
    - **User Name** - oracle
    - **Password** - Nutanix/4u
@@ -203,13 +204,13 @@ Verify Table is Back
 
      ssh oracle@PRODDB_Clone1 IP
 
-#. Launch **sqlplus**
+#. 启动 **sqlplus**
 
      .. code-block:: Bash
 
        sqlplus / as sysdba
 
-#. Verify the table is back by executing the following to list the table:
+#. 通过执行以下操作列出表来验证表是否已恢复：
 
      .. code-block:: Bash
 
@@ -218,5 +219,3 @@ Verify Table is Back
        from sys.all_tables
        where table_name like 'TEST%';
 
-Takeaways
-+++++++++

@@ -1,21 +1,21 @@
-.. _deploy_oracle_era:
+.. _部署Oracle Era:
 
 -------------------------
-Deploying Oracle with Era
+通过Era部署Oracle数据库
 -------------------------
 
-Each quarter, Oracle releases a grouping of patches referred to as a PSU. **In this lab you will walk through the deployment and patching of both Oracle and Grid software for an Oracle 19c database using Era.**
+Oracle每个季度都会发布一组补丁，称为PSU. **在本实验中，您将逐步学习如何使用Era部署Oracle 19c数据库和Grid软件并进行补丁修复。** 
 
-Create Oracle Server with Era
+使用Era创建Oracle数据库
 +++++++++++++++++++++++++++++
 
-In this exercise you will deploy a fresh Oracle database using your *Initials*\ **_ORACLE_19C** 1.0 Software Profile.
+在本练习中，您将使用 *Initials*\ **_ORACLE_19C** 1.0软件配置文件来部署一套全新的Oracle数据库.
 
-#. Select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
+#. 从下拉菜单中选择 **Databases** ，并从左侧菜单中选择 **Sources** .
 
-#. Click **+ Provision > Single Node Database**.
+#. 点击 **+ Provision > Single Node Database**.
 
-#. In the **Provision a Database** wizard, fill out the following fields to configure the Database Server:
+#. 在 **Provision a Database** 向导中, 填写以下字段以配置数据库服务器:
 
    - **Engine** - Oracle
    - **Database Server** - Create New Server
@@ -35,11 +35,11 @@ In this exercise you will deploy a fresh Oracle database using your *Initials*\ 
 
    .. note::
 
-         By selecting Enable High Availability, Oracle Grid is configured as part of the deployment and Oracle Automatic Storage Management (ASM) is used for volume management. Without High Availability enabled, Linux LVM and file systems would be used for database storage. Grid and ASM are required for clustered Oracle RAC deployments.
+         当选择启用高可用选项时，Oracle Grid将被作为数据库部署的一部分执行，并且Oracle自动存储管理（ASM）也会被部署用于卷管理。如果没有启用高可用性，数据库存储将会用Linux LVM和文件系统的方式。如果部署集群的Oracle Rac，Grid和ASM为必装项.
 
    .. figure:: images/4.png
 
-#. Click **Next**, and fill out the following fields to configure the Database:
+#. 点击 **Next**, 然后填写以下字段以配置数据库:
 
    -  **Database Name** - *Initials*\ _proddb
    -  **SID** - *Initials*\ prod
@@ -50,16 +50,17 @@ In this exercise you will deploy a fresh Oracle database using your *Initials*\ 
 
    .. note::
 
-      For each database engine supported by Era, you have the opportunity to run scripts before and after database creation. Common use cases include:
+      对于Era可支持的每一个数据库引擎，您都可以选择在数据库创建之前或之后运行自定义脚本来实现定制化。常见的用例包括:
 
-      - Data masking scripts
-      - Register the database with DB monitoring solution
-      - Scripts to update DNS/IPAM
-      - Scripts to automate application setup, such as app-level cloning for Oracle PeopleSoft
+      - 数据屏蔽脚本
+      - 向数据库监视解决方案注册数据库
+      - 用于更新DNS/IPAM的脚本
+      - 用于自动执行应用程序设置的脚本，例如Oracle PeopleSoft的应用程序级克隆
 
-      **Encryption** can be used in situations where compliance requires encryption and stops would-be attackers from bypassing the database and reading sensitive information directly from storage by enforcing data-at-rest encryption in the database layer.
+      在数据库层开启 **Encryption** 静态加密功能，一般会用于一些合规性要求，或者有效阻止潜在的攻击者绕过数据库直接从存储中读取敏感信息的风险。
 
-#. Click **Next** and fill out the following fields to configure the Time Machine for your database:
+
+#. 点击 **Next** 然后填写以下字段为数据库配置Time Machine:
 
    - **Name** - *Initials*\ _proddb_TM (Default)
    - **Description** - (Optional)
@@ -68,8 +69,8 @@ In this exercise you will deploy a fresh Oracle database using your *Initials*\ 
 
    .. figure:: images/6.png
 
-#. Click **Provision** to begin creating your new database server VM and *Initials*\ **_proddb** database.
+#. 单击 **Provision** 开始创建新的数据库服务器VM和 *Initials*\ **_proddb** 数据库.
 
-#. Select **Operations** from the dropdown menu to monitor the provisioning. This process should take approximately 60 minutes (depending on your cluster configuration).
+#. 从下拉菜单中选择 **Operations** 以监控操作进度。此过程通常需要60分钟（具体取决于您的群集配置）.
 
-#. Please proceed to the following exercises while the database is being provisioned.
+#. 配置数据库时，请继续以下练习.
