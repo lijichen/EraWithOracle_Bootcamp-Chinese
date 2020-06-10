@@ -36,71 +36,72 @@
 Getting Started
 ---------------
 
-Welcome to the Databases: Era with Oracle Bootcamp! This workbook accompanies an instructor-led session that introduces Nutanix technologies and many common management tasks.
+欢迎来到Era For Oracle数据库训练营！本实验手册将配合讲师课程，为您介绍Nutanix在数据库方面的技术以及许多常见的管理任务。
 
 
-What's New
+内容更新
 ++++++++++
 
-- Workshop updated for the following software versions:
+- 本实验手册环境和所用功能已经同步更新到以下软件版本:
     - AOS 5.11.x / 5.15.x / 5.16.x
     - PC 5.16.x
 
-- Optional Lab Updates:
-
-Agenda
+- 可选实验更新:
+    - 暂无更新 
+    
+日程安排
 ++++++
 
-- Introductions
-- Lab Setup
-- Deploy Oracle
-- Deploy Oracle with Era
-- Patching Oracle with Era
-- Admin Oracle with Era
+- 实验手册介绍
+- 实验搭建
+- Oracle数据库部署
+- 通过Era部署Oracle数据库
+- 通过Era为Oracle更新补丁
+- 通过Era管理Oracle
 
-Optional labs:
+可选实验:
 
-- Era API Explorer
+- Era API资源管理器
 
-Introductions
+个人介绍
 +++++++++++++
 
-- Name
-- Familiarity with Nutanix
+- 姓名
+- 与Nutanix的关系或经历
 
-Initial Setup
+ 初始设定
 +++++++++++++
 
-- Take note of the *Passwords* being used.
-- Log into your virtual desktops (connection info below)
+- 记录本次实验会用到的所有 *密码* .
+- 登录到您的虚拟桌面(连接方法如下)
 
-Environment Details
+环境信息
 +++++++++++++++++++
 
-Nutanix Workshops are intended to be run in the Nutanix Hosted POC environment. Your cluster will be provisioned with all necessary images, networks, and VMs required to complete the exercises.
+Nutanix动手训练营会利用到远程Nutanix Hosted PoC的设备。为了能够使您更方便的完成联系，您所分配的集群会预先部署所有可用的镜像，网络以及虚拟机资源。
 
-Networking
+网络
 ..........
 
-Hosted POC clusters follow a standard naming convention:
+Hosted POC 集群遵循标准的命名约定:
 
 - **Cluster Name** - POC\ *XYZ*
 - **Subnet** - 10.**21**.\ *XYZ*\ .0
 - **Cluster IP** - 10.**21**.\ *XYZ*\ .37
 
-If provisioned from the marketing pool:
+如果从市场营销池中配置:
 
 - **Cluster Name** - MKT\ *XYZ*
 - **Subnet** - 10.**20**.\ *XYZ*\ .0
 - **Cluster IP** - 10.**20**.\ *XYZ*\ .37
 
-For example:
+例如:
 
 - **Cluster Name** - POC055
 - **Subnet** - 10.21.55.0
 - **Cluster IP** - 10.21.55.37
 
-Throughout the Workshop there are multiple instances where you will need to substitute *XYZ* with the correct octet for your subnet, for example:
+在整个训练营中，您需要在多个环节中，使用分配给您的8位网段信息替换实验手册中的 *XYZ* ,例如:
 
 .. list-table::
    :widths: 25 75
@@ -115,7 +116,7 @@ Throughout the Workshop there are multiple instances where you will need to subs
    * - 10.21.\ *XYZ*\ .40
      - **DC** VM IP, NTNXLAB.local Domain Controller
 
-Each cluster is configured with 2 VLANs which can be used for VMs:
+每个群集配置有2个可用于VM的VLAN:
 
 .. list-table::
   :widths: 25 25 10 40
@@ -134,12 +135,12 @@ Each cluster is configured with 2 VLANs which can be used for VMs:
     - *XYZ1*
     - 10.21.\ *XYZ*\ .132-10.21.\ *XYZ*\ .253
 
-Credentials
+密码
 ...........
 
 .. note::
 
-  The *<Cluster Password>* is unique to each cluster and will be provided by the leader of the Workshop.
+  每套集群的 *<Cluster Password>* 是唯一的，会在课程中由讲师提供.
 
 .. list-table::
    :widths: 25 35 40
@@ -161,7 +162,7 @@ Credentials
      - nutanix
      - *<Cluster Password>*
 
-Each cluster has a dedicated domain controller VM, **DC**, responsible for providing AD services for the **NTNXLAB.local** domain. The domain is populated with the following Users and Groups:
+每个群集都有一个专用的域控制器VM， **DC**，负责为 **NTNXLAB.local** 域提供AD服务，域中填充了以下用户和组：
 
 .. list-table::
    :widths: 25 35 40
@@ -192,12 +193,12 @@ Each cluster has a dedicated domain controller VM, **DC**, responsible for provi
      - user01-user25
      - nutanix/4u
 
-Access Instructions
+ 访问说明
 +++++++++++++++++++
 
-The Nutanix Hosted POC environment can be accessed a number of different ways:
+学员可以通过多种不同方式访问Nutanix托管POC环境:
 
-Lab Access User Credentials
+实验环境访问用户凭证
 ...........................
 
 PHX Based Clusters:
@@ -206,10 +207,10 @@ PHX Based Clusters:
 RTP Based Clusters:
 **Username:** RTP-POCxxx-User01 (up to RTP-POCxxx-User20), **Password:** *<Provided by Instructor>*
 
-Frame VDI
+Frame 桌面
 .........
 
-Login to: https://frame.nutanix.com/x/labs
+登录: https://frame.nutanix.com/x/labs
 
 **Nutanix Employees** - Use your **NUTANIXDC** credentials
 **Non-Employees** - Use **Lab Access User** Credentials
@@ -224,7 +225,7 @@ RTP Based Clusters Login to: https://xld-useast1.nutanix.com
 **Nutanix Employees** - Use your **NUTANIXDC** credentials
 **Non-Employees** - Use **Lab Access User** Credentials
 
-Employee Pulse Secure VPN
+Pulse Secure VPN（Nutanix雇员专用）
 ..........................
 
 Download the client:
@@ -236,9 +237,9 @@ RTP Based Clusters Login to: https://xld-useast1.nutanix.com
 **Nutanix Employees** - Use your **NUTANIXDC** credentials
 **Non-Employees** - Use **Lab Access User** Credentials
 
-Install the client.
+安装安装端
 
-In Pulse Secure Client, **Add** a connection:
+在Pulse Secure 客户端, 点击 **Add** 一个连接:
 
 For PHX:
 
@@ -253,7 +254,7 @@ For RTP:
 - **Server URL** - xlv-useast1.nutanix.com
 
 
-Nutanix Version Info
+Nutanix 版本信息
 ++++++++++++++++++++
 
 - **AHV Version** - AHV 20170830.337

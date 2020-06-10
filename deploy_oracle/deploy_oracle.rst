@@ -1,31 +1,31 @@
-.. _deploy_oracle:
+.. _oracle部署:
 
 -----------------
-Deploying Oracle
+部署Oracle数据库
 -----------------
 
-Traditional database VM deployment resembles the diagram below. The process generally starts with a IT ticket for a database (from Dev, Test, QA, Analytics, etc.). Next one or more teams will need to deploy the storage resources and VM(s) required. Once infrastructure is ready, a DBA needs to provision and configure database software. Once provisioned, any best practices and data protection/backup policies need to be applied. Finally the database can be handed over to the end user. That's a lot of handoffs, and the potential for a lot of friction.
+    传统的数据库VM部署类似于下图，该过程通常从数据库的IT请求案例发起开始（可能来自Dev，Test，QA，Analytics等用途），接下来的一个或多个团队将需要部署所需的存储和计算资源。当基础架构资源就绪后，DBA需要配置和配置数据库软件，然后应用最佳实践进行优化并配置数据保护/备份策略。最后这个数据库可以移交给最终用户，这一过程往往需要大量交接工作，并且可能会造成很多摩擦。
 
 .. figure:: images/0.png
 
-Whereas with a Nutanix cluster and Era, provisioning and protecting a database should take you no longer than it took to read this intro.
+但如果您采用Nutanix和Era解决方案，那么用来部署和配置数据库保护策略的时间，不会比阅读这篇实验手册所需时间长。
 
-**In this lab you will deploy a Oracle VM, by cloning a source Oracle 19c Source VM. This VM will act as a master image to create a profile for deploying additional Oracle VMs using Era.**
+**在本实验中，您将通过克隆Oracle 19c的源虚拟机来完成部署，这个VM将充当主映像，来创建配置文件并通过Era来部署另一个VM。**
 
-Clone Source Oracle VM
+克隆源Oracle VM
 ++++++++++++++++++++++
 
-This VM is running Oracle 19c with April PSU patches applied.
+该虚拟机正在运行Oracle 19c的版本，并安装了四月的PSU补丁。
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. 在 **Prism Central**, 选择 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
    .. figure:: images/1.png
 
-#. Select the checkbox for **Oracle19cSource**, and click **Actions > Clone**.
+#. 选中 **Oracle19cSource** 复选框, 然后单击 **Actions > Clone**.
 
    .. figure:: images/1b.png
 
-#. Fill out the following fields:
+#. 填写以下字段:
 
    - **Number Of Clones** - 1
    - **Name** - *Initials*\ _oracle_base
@@ -34,65 +34,65 @@ This VM is running Oracle 19c with April PSU patches applied.
    - **Number of Cores per vCPU** - 1
    - **Memory** - 8 GiB
 
-#. Click **Save** to create the VM.
+#. 点击 **Save** 以创建虚拟机.
 
-   You will now create a copy of this VM which will later be used to install October PSU patches.
+   接下来，您需要再创建一个这个虚拟机的副本，我们随后将用于安装Oracle PSU补丁程序。
 
-#. Once the VM has been created, click **Actions > Clone** again.
+#. 当虚拟机创建后，再次点击 **Actions > Clone** .
 
-#. Change the name to *Initials*\ **_oracle_patched** and click **Save**.
+#. 将VM名字修改为 *Initials*\ **_oracle_patched** 并点击 **Save**.
 
-#. Select both VMs and click **Actions > Power On**.
+#. 选中两个VM，点击 **Actions > Power On**.
 
-Exploring Era Resources
+探索Era的资源
 +++++++++++++++++++++++
 
-Era is distributed as a virtual appliance that can be installed on either AHV or ESXi. For the purposes of conserving memory resources, a shared Era server has already been deployed on your cluster.
+Era可以作为虚拟实例安装在AHV或ESXi环境中。为了节省实验环境的内存资源，我们已经在本次实验环境中预先部署了共享的Era的实例。
 
 .. note::
 
-   If you're interested, instructions for the brief installation of the Era appliance can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Era-User-Guide-v12:era-era-installing-on-ahv-t.html>`_.
+   如果您有兴趣，可以在此链接中找到Era的简要安装说明 `链接 <https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Era-User-Guide-v12:era-era-installing-on-ahv-t.html>`_.
 
-#. In **Prism Central > VMs > List**, identify the IP address assigned to the **EraServer-\*** VM using the **IP Addresses** column.
+#. 在 **Prism Central > VMs > List** 中, 在 **IP Addresses** 列中查看分配给 **EraServer-\*** 的IP地址
 
-#. Open \https://*ERA-VM-IP:8443*/ in a new browser tab.
+#. 在浏览器中打开 \https://*ERA-VM-IP:8443*/ .
 
-#. Login using the following credentials:
+#. 用以下凭据登录:
 
    - **Username** - admin
    - **Password** - nutanix/4u
 
-#. From the **Dashboard** dropdown, select **Administration**.
+#. 从 **Dashboard** 的下拉菜单中, 选择 **Administration**.
 
-#. Under **Cluster Details**, note that Era has already been configured for your assigned cluster.
+#. 在 **Cluster Details** 中,请注意已经为您分配的集群配置了Era。
 
    .. figure:: images/6.png
 
-#. Select **Era Resources** from the left-hand menu.
+#. 从左侧菜单中选择 **Era Resources** .
 
-#. Review the configured Networks. If no Networks show under **VLANs Available for Network Profiles**, click **Add**. Select **Secondary** VLAN and click **Add**.
+#. 查看已配置的网络，如果在 **VLANs Available for Network Profiles** 下没有网络显示, 请点击 **Add** ，并选择 **Secondary** VLAN并添加 **Add**.
 
    .. note::
 
-      Leave **Manage IP Address Pool** unchecked, as we will be leveraging the cluster's IPAM to manage addresses
+      将 **Manage IP Address Pool** 保持未选中状态，因为我们将使用群集的IPAM管理地址
 
    .. figure:: images/era_networks_001.png
 
-#. From the dropdown menu, select **SLAs**.
+#. 从下拉菜单中选择 **SLAs**.
 
    .. figure:: images/7a.png
 
-   Era has five built-in SLAs (Gold, Silver, Bronze, Zero, and Brass). SLAs control how the database server is backed up. This can be with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
+   Era 有五个内置的SLAs级别 (分别为Gold, Silver, Bronze, Zero, and Brass). SLAs是用来控制如何备份数据库的策略集合，通常包括持续数据保护，每天，每周，每月或每季度的保护间隔。
 
-#. From the dropdown menu, select **Profiles**.
+#. 从下拉菜单中，选择 **Profiles**.
 
-   Profiles pre-define resources and configurations, making it simple to consistently provision environments and reduce configuration sprawl. For example, Compute Profiles specifiy the size of the database server, including details such as vCPUs, cores per vCPU, and memory.
-
-#. If you do not see any networks defined under **Network**, click **+ Create**.
+   配置文件可用来预定义资源和配置, 从而使一致的资源部署和避免重复配置变的更加简单。例如，“计算配置文件”可指定数据库服务器的大小，包括诸如vCPU，每个vCPU的核心数和内存之类的详细信息
+   
+#. 如果在 **Network** 下看不到任何定义的网络, 点击 **+ Create**.
 
    .. figure:: images/8.png
 
-#. Fill out the following fields and click **Create**:
+#. 填写以下字段，然后点击 **Create**:
 
    - **Engine** - ORACLE
    - **Type** - Single Instance
@@ -101,14 +101,14 @@ Era is distributed as a virtual appliance that can be installed on either AHV or
 
    .. figure:: images/9.png
 
-Register Oracle Server with Era
+通过Era注册Oracle 服务器
 +++++++++++++++++++++++++++++++
 
-In this exercise, you will register your April PSU VM and register it as version 1.0 of your Oracle 19c Software Profile. The Software Profile is a template containing both the operating system and database software, and can be used to deploy additional database servers.
+在本练习中，将注册您之前创建的四月PSU版本的Oracle VM，并创建为Oracle 19c软件配置文件的Version 1.0版本。软件配置文件可以作为一个包含操作系统和数据库软件的模板，可以用来部署额外的数据库。
 
-#. In **Era**, select **Database Servers** from the dropdown menu and **List** from the lefthand menu.
+#. 在 **Era** 中, 从下拉菜单中选择 **Database Servers** 并从左侧菜单中选择 **List** 。
 
-#. Click **+ Register** and fill out the following **Database Server** fields:
+#. 单击 **+ Register** 并按提示填写以下 **Database Server** 字段:
 
    - **Engine** - Oracle
    - **IP Address or Name of VM** - *Initials*\ _oracle_base
@@ -121,23 +121,23 @@ In this exercise, you will register your April PSU VM and register it as version
 
    .. note::
 
-      The Era Drive User can be any user on the VM that has sudo access with NOPASSWD setting. Era will use this user's credentials to perform various operations, such as taking snapshots.
+      Era驱动器用户可以是VM上的具备sudo权限的并设置为NoPASSWD的任意用户，Era会使用该用户的凭据执行各种操作，例如拍摄快照。
 
-      Oracle Database Home is the directory where the Oracle database software is installed, and is a mandatory parameter for registering a database server.
+      Oracle Database Home是Oracle数据库软件的安装目录，并且是注册数据库服务器时所需的必备参数。
 
-      Grid Infrastructure Home is the directory where the Oracle Grid Infrastructure software is installed. This is only applicable for Oracle RAC or SIHA databases.
+      Grid Infrastructure Home是Oracle Grid Infrastructure软件的安装目录。这个目录仅适用于Oracle RAC或 SIHA数据库。
 
    .. figure:: images/2.png
 
-#. Click **Register**
+#. 点击 **Register**
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes. Wait for the registration operation to successfully complete before moving on.
+#. 从下拉菜单中选择 **Operations** 以观察注册进度，此过程大约需要5分钟。等待注册操作成功完成后，再继续下一步操作。
 
-   Once the *Initials*\ **_oracle_base** server has been registered with Era, we need to create a software profile in order to deploy additional Oracle VMs.
+   当 *Initials*\ **_oracle_base** 服务器在Era成功注册后，我们需要创建一个Software Profile，用来部署其它的Oracle VM.
+   
+#. 从下拉菜单中选择 **Profiles** ，并从左侧菜单中选择 **Software** .
 
-#. Select **Profiles** from the dropdown menu and **Software** from the lefthand menu.
-
-#. Click **+ Create** and fill out the following fields:
+#. 点击 **+ Create** 并填写以下字段:
 
    - **Engine** - Oracle
    - **Type** - Single Instance
@@ -147,18 +147,18 @@ In this exercise, you will register your April PSU VM and register it as version
 
    .. figure:: images/3.png
 
-#. Click **Create**.
+#. 点击 **Create**.
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
+#. 从下拉菜单中选择 **Operations** 以观察注册进度，此过程大约需要5分钟
 
-Register Your Database
+注册数据库
 ++++++++++++++++++++++
 
-#. In **Era**, select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
+#. 在 **Era** 中, 从下拉菜单中选择 **Databases** 并从左侧菜单中选择 **Sources** .
 
    .. figure:: images/11.png
 
-#. Click **+ Register** and fill out the following fields:
+#. 点击 **+ Register** 并填写以下字段:
 
    - **Engine** - ORACLE
    - **Database is on a Server that is:** - Registered
@@ -166,24 +166,24 @@ Register Your Database
 
    .. figure:: images/12.png
 
-#. Click **Next**
+#. 点击 **Next**
 
    - **Database Name in Era** - *Initials*\ -orcl
    - **SID** - orcl19c
 
    .. note::
 
-     The Oracle System ID (SID) is used to uniquely identify a particular database on a system. For this reason, one cannot have more than one database with the same SID on a computer system. When using RAC, all instances belonging to the same database must have unique SID's.
-
+     Oracle系统ID（SID）是系统中的特定数据库的唯一标识。因此，一个计算机系统上不能有多个具有相同SID的数据库。使用RAC时，属于同一数据库的所有实例都必须具有唯一的SID。
+     
    .. figure:: images/13.png
 
-#. Click **Next**
+#. 点击 **Next**
 
    - **Name** - *Initials*\ -orcl_TM
    - **SLA** - DEFAULT_OOB_BRASS_SLA (no continuous replay)
 
    .. figure:: images/14.png
 
-#. Click **Register**
+#. 点击 **Register**
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
+#. 从下拉菜单中选择 **Operations** 以观察注册进度，此过程大约需要5分钟。
