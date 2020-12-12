@@ -63,33 +63,16 @@ Nutanix Era为您的企业云提供DBaaS。利用Nutanix企业云操作系统，
 
   #. 点击 **Save & Configure Environment**.
 
-部署 Windows Tools VM
+为群集的 Windows VM 设置密码
 ++++++++++++++++++++++++++++
 
-在本章节中的某些练习将需要利用Windows Tools VM。请按照以下步骤从磁盘映像配置您的个人VM
+在本章节中的某些练习将需要利用Windows VM。请按照以下步骤设置并访问Windows VM
 
 #. 在 **Prism Central** 中, 选择 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. 点击 **+ Create VM**.
+#. 找到Windows VM
 
-#. 填写以下字段以完成用户VM的创建请求:
+#. 为Windows VM 开机，并打开Console设置密码.
 
-   - **Name** - *Initials*\ -WinToolsVM
-   - **Description** - Manually deployed Tools VM
-   - **vCPU(s)** - 2
-   - **Number of Cores per vCPU** - 1
-   - **Memory** - 4 GiB
+#. 设置完成密码，在我的电脑中打开RDP远程访问权限.
 
-   - 选择 **+ Add New Disk**
-      - **Type** - DISK
-      - **Operation** - Clone from Image Service
-      - **Image** - WinToolsVM.qcow2
-      - 选择 **Add**
-
-   - 选择 **Add New NIC**
-      - **VLAN Name** - Secondary
-      - 选择 **Add**
-
-#. 点击 **Save** 以创建新的VM.
-
-#. 打开 *Initials*\ **-WinToolsVM** 虚拟机的电源。
