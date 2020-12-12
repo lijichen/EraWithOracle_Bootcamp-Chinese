@@ -12,6 +12,21 @@
 
 **在本实验中，您将通过克隆Oracle 19c的源虚拟机来完成部署，这个VM将充当主映像，来创建配置文件并通过Era来部署另一个VM。**
 
+添加Image镜像
+++++++++++++++++++++++
+1.进入PE或PC中，点击 Setting -> Image Configuration
+2.填写以下字段以完成用户VM的创建请求:
+    - Name - Oracle-RegVM
+    - Description - Manually deployed Tools VM
+    - vCPU(s) - 2
+    - Number of Cores per vCPU - 4
+    - Memory - 16 GiB
+选择 + Add New Disk
+    - Type - DISK
+    - Operation - Clone from Image Service
+    - Image - 19c-bootdisk.qcow2
+    
+    
 创建Oracle VM
 ++++++++++++++++++++++
 1.进入PE或PC中，点击 + Create VM
