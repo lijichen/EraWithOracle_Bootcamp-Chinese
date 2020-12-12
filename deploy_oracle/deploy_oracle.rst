@@ -14,6 +14,26 @@
 
 创建Oracle VM
 ++++++++++++++++++++++
+1.进入PE或PC中，点击 + Create VM
+2.填写以下字段以完成用户VM的创建请求:
+    - **Name - Oracle-RegVM
+    - **Description - Manually deployed Tools VM
+    - **vCPU(s) - 2
+    - **Number of Cores per vCPU - 4
+    - **Memory - 16 GiB
+选择 + Add New Disk
+    - **Type - DISK
+    - **Operation - Clone from Image Service
+    - **Image - 19c-bootdisk.qcow2
+选择 Add
+同样操作把
+19c-disk1.qcow2 至 19c-disk9.qcow2磁盘同样添加.
+选择 Add New NIC
+    - **VLAN Name - Rx-Automation-Network 
+选择 Add
+点击 Save 以创建新的VM.
+打开 新建Oracle-RegVM 虚拟机的电源。
+
 
 该虚拟机正在运行Oracle 19c的版本，并安装了四月的PSU补丁。
 
