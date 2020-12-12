@@ -28,6 +28,7 @@
 选择 Add
 同样操作把
 19c-disk1.qcow2 至 19c-disk9.qcow2磁盘同样添加.
+
 选择 Add New NIC
     - VLAN Name - Rx-Automation-Network 
 选择 Add
