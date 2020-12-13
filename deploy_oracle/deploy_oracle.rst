@@ -73,36 +73,6 @@ http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk9.qcow2
 点击 Save 以创建新的VM.
 打开 新建Oracle-RegVM 虚拟机的电源。
 
-
-该虚拟机正在运行Oracle 19c的版本，并安装了四月的PSU补丁。
-
-#. 在 **Prism Central**, 选择 :fa:`bars` **> Virtual Infrastructure > VMs**.
-
-   .. figure:: images/1.png
-
-#. 选中 **Oracle19cSource** 复选框, 然后单击 **Actions > Clone**.
-
-   .. figure:: images/1b.png
-
-#. 填写以下字段:
-
-   - **Number Of Clones** - 1
-   - **Name** - *Initials*\ _oracle_base
-   - **Description** - (Optional) Description for your VM.
-   - **vCPU(s)** - 2
-   - **Number of Cores per vCPU** - 1
-   - **Memory** - 8 GiB
-
-#. 点击 **Save** 以创建虚拟机.
-
-   接下来，您需要再创建一个这个虚拟机的副本，我们随后将用于安装Oracle PSU补丁程序。
-
-#. 当虚拟机创建后，再次点击 **Actions > Clone** .
-
-#. 将VM名字修改为 *Initials*\ **_oracle_patched** 并点击 **Save**.
-
-#. 选中两个VM，点击 **Actions > Power On**.
-
 探索Era的资源
 +++++++++++++++++++++++
 
