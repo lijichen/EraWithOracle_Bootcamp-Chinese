@@ -23,13 +23,21 @@ Image Name取19c-bootdisk
 4.Save保存.
 同样的操作把
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk1.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk2.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk3.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk4.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk5.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk6.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk7.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk8.qcow2
+
 http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk9.qcow2
 分别同样添加到Image库中。
 
