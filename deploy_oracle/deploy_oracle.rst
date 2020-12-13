@@ -15,18 +15,24 @@
 添加Image镜像
 ++++++++++++++++++++++
 1.进入PE或PC中，点击 Setting -> Image Configuration
-2.填写以下字段以完成用户VM的创建请求:
-    - Name - Oracle-RegVM
-    - Description - Manually deployed Tools VM
-    - vCPU(s) - 2
-    - Number of Cores per vCPU - 4
-    - Memory - 16 GiB
-选择 + Add New Disk
-    - Type - DISK
-    - Operation - Clone from Image Service
-    - Image - 19c-bootdisk.qcow2
-    
-    
+2.在Image Configuration选择Upload Image
+3.在From URL中输入
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-bootdisk.qcow2
+Storage Container选择Image或保持默认
+Image Name取19c-bootdisk
+4.Save保存.
+同样的操作把
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk1.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk2.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk3.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk4.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk5.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk6.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk7.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk8.qcow2
+http://10.42.194.11/workshop_staging/era/oracle19cSIHA/19c-disk9.qcow2
+分别同样添加到Image库中。
+
 创建Oracle VM
 ++++++++++++++++++++++
 1.进入PE或PC中，点击 + Create VM
