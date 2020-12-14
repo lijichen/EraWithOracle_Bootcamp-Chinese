@@ -34,9 +34,9 @@ Oracle每个季度都会发布一组补丁，称为PSU. **在本实验中，您�
 
 如何生成公钥：
 
-1.在注册Oracle DB的虚拟机上运行ssh-keygen -t rsa，然后向导完成后，生成密钥文件.
+   1.在注册Oracle DB的虚拟机上运行ssh-keygen -t rsa，然后向导完成后，生成密钥文件.
 
-2.使用cat /root/.ssh/id_rsa.pub查看公钥内容.
+   2.使用cat /root/.ssh/id_rsa.pub查看公钥内容.
 
 
    .. note::
