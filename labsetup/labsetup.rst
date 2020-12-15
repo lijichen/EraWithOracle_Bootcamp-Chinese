@@ -125,3 +125,10 @@ Nutanix Era为您的企业云提供DBaaS。利用Nutanix企业云操作系统，
 参考文档：
 
 https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0
+
+集群检查
+++++++++++++++++++++++
+1.检查群集CVM时间，ahv时间
+
+2.检查群集时区设置
+
