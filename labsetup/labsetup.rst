@@ -99,10 +99,9 @@ Image Name取ERA-Server-build-2.0.0.2
 
 2.填写以下字段以完成用户VM的创建请求:
 
-    - Name - Oracle-RegVM
-    - Description - Manually deployed Tools VM
+    - Name - EraServer
     - vCPU(s) - 2
-    - Number of Cores per vCPU - 4
+    - Number of Cores per vCPU - 2
     - Memory - 16 GiB
 
 选择 + Add New Disk
@@ -121,4 +120,8 @@ Image Name取ERA-Server-build-2.0.0.2
 
 点击 Save 以创建新的VM.
 
-打开 新建Oracle-RegVM 虚拟机的电源。
+打开 新建EraServer 虚拟机的电源。
+
+参考文档：
+
+https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0
