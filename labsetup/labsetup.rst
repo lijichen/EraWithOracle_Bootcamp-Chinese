@@ -85,11 +85,11 @@ Nutanix Era为您的企业云提供DBaaS。利用Nutanix企业云操作系统，
 
 #. 在From URL中输入
 
-http://10.42.194.11/workshop_staging/ERA-Server-build-2.0.0.2.qcow2
+    - http://10.42.194.11/workshop_staging/ERA-Server-build-2.0.0.2.qcow2
 
-Storage Container选择Image或保持默认
+    - Storage Container选择Image或保持默认
 
-Image Name取ERA-Server-build-2.0.0.2
+    - Image Name取ERA-Server-build-2.0.0.2
 
 #. Save保存.
 
