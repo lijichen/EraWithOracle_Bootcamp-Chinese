@@ -76,3 +76,21 @@ Nutanix Era为您的企业云提供DBaaS。利用Nutanix企业云操作系统，
 
 #. 设置完成密码，在我的电脑中打开RDP远程访问权限.
 
+上传Era的Image
+++++++++++++++++++++++++++++
+
+#. 1.进入PE或PC中，点击 Setting -> Image Configuration
+
+#. 2.在Image Configuration选择Upload Image
+
+#. 3.在From URL中输入
+
+http://10.42.194.11/workshop_staging/ERA-Server-build-2.0.0.2.qcow2
+
+Storage Container选择Image或保持默认
+
+Image Name取ERA-Server-build-2.0.0.2
+
+#. 4.Save保存.
+
+
