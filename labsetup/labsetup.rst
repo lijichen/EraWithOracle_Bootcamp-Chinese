@@ -130,5 +130,11 @@ https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guid
 ++++++++++++++++++++++
 1.检查群集CVM时间，ahv时间
 
+    - 在CVM上运行allssh date检查每个CVM的时间
+    - 在CVM上运行hostssh date检查每个AHV的时间
+    
+
 2.检查群集时区设置
 
+    - 在CVM上运行 ncli cluster info查看时区设置
+    - 运行ncli cluster set-timezone timezone=Asia/Shanghai   设置群集时区为CST时间. 
