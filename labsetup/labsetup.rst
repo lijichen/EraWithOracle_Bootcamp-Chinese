@@ -93,4 +93,32 @@ Image Name取ERA-Server-build-2.0.0.2
 
 #. Save保存.
 
+创建Era虚拟机
+++++++++++++++++++++++
+1.进入PE或PC中，点击 + Create VM
 
+2.填写以下字段以完成用户VM的创建请求:
+
+    - Name - Oracle-RegVM
+    - Description - Manually deployed Tools VM
+    - vCPU(s) - 2
+    - Number of Cores per vCPU - 4
+    - Memory - 16 GiB
+
+选择 + Add New Disk
+
+    - Type - DISK
+    - Operation - Clone from Image Service
+    - Image - ERA-Server-build-2.0.0.2
+    
+选择 Add
+
+选择 Add New NIC
+
+    - VLAN Name - Rx-Automation-Network 
+   
+选择 Add
+
+点击 Save 以创建新的VM.
+
+打开 新建Oracle-RegVM 虚拟机的电源。
